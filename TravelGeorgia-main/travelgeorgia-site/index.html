@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TravelGeorgia — საქართველოს ლაშქრობისა და მოგზაურობის ბილიკები</title>
+<meta name="description" content="მოძებნე, გაფილტრე და დაგეგმე შენი ლაშქრობა საქართველოს ყველა რეგიონში — მთიანი კავკასიიდან სამეგრელომდე." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@500;700&family=Noto+Sans+Georgian:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="home">
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Travel<span>Georgia</span></a>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="index.html" data-page="home">მთავარი</a></li>
+        <li><a href="catalog.html" data-page="catalog">ბილიკები</a></li>
+        <li><a href="plan.html" data-page="plan">ჩემი გეგმა</a></li>
+        <li><a href="contact.html" data-page="contact">კონტაქტი</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="თემის შეცვლა" title="მუქი/ნათელი თემა">🌙</button>
+      <button class="nav-toggle" aria-expanded="false" aria-label="მენიუს გახსნა">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">9 რეგიონი · მთიდან ზღვამდე</p>
+      <h1>იპოვე შენი შემდეგი ბილიკი საქართველოში</h1>
+      <p class="lede">ყაზბეგიდან სამეგრელომდე — გაფილტრე ბილიკები სირთულის, მანძილისა და სეზონის მიხედვით და შეაგროვე შენი პირადი მარშრუტი.</p>
+      <div class="hero-actions">
+        <a href="catalog.html" class="btn btn-primary">ბილიკების დათვალიერება</a>
+        <a href="plan.html" class="btn btn-ghost">ჩემი გეგმა</a>
+      </div>
+      <div class="stat-row" id="stat-row">
+        <div class="stat"><span class="num" id="stat-trails">—</span><span class="label">ბილიკი/ლოკაცია</span></div>
+        <div class="stat"><span class="num" id="stat-regions">—</span><span class="label">რეგიონი</span></div>
+        <div class="stat"><span class="num" id="stat-distance">—</span><span class="label">კმ ჯამური სიგრძე</span></div>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 480 360" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <rect width="480" height="360" fill="#1e2b23"/>
+        <g fill="none" stroke="#35473c" stroke-width="1.5">
+          <path d="M-20 300 Q 100 260 180 290 T 400 260 T 520 300"/>
+          <path d="M-20 260 Q 110 210 190 245 T 410 210 T 520 250"/>
+          <path d="M-20 215 Q 120 160 200 195 T 420 155 T 520 195"/>
+          <path d="M-20 165 Q 130 110 210 140 T 430 100 T 520 140"/>
+        </g>
+        <path d="M40 300 L150 120 L210 220 L260 90 L340 300 Z" fill="#26382e" stroke="#c98a34" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="260" cy="90" r="4" fill="#e0ab5f"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>რეგიონები</h2>
+      <p>დააკლიკე რეგიონს — ავტომატურად გადახვალ დაფილტრულ კატალოგზე.</p>
+    </div>
+    <div class="region-grid" id="region-grid">
+      <!-- JS ავსებს დინამიურად -->
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 TravelGeorgia — სასწავლო პროექტი</span>
+    <span>დამზადებულია სუფთა HTML, CSS და JavaScript-ით</span>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // მთავარი გვერდის სტატისტიკისა და რეგიონების ბარათების რენდერი
+  function renderHomeStats(trails) {
+    const regions = getRegions(trails);
+    const totalDistance = trails.reduce((sum, t) => sum + t.distanceKm, 0);
+
+    document.getElementById("stat-trails").textContent = trails.length;
+    document.getElementById("stat-regions").textContent = regions.length;
+    document.getElementById("stat-distance").textContent = totalDistance;
+  }
+
+  function renderRegionGrid(trails) {
+    const grid = document.getElementById("region-grid");
+    const regions = getRegions(trails);
+
+    grid.innerHTML = regions
+      .map((region) => {
+        const count = trails.filter((t) => t.region === region).length;
+        const sample = trails.find((t) => t.region === region);
+        return `
+          <a class="region-card" href="catalog.html?region=${encodeURIComponent(region)}">
+            <div class="count">${count} ბილიკი</div>
+            <h3>${region}</h3>
+            <p>მაგ. ${sample.name}</p>
+          </a>`;
+      })
+      .join("");
+  }
+
+  renderHomeStats(TRAILS);
+  renderRegionGrid(TRAILS);
+</script>
+</body>
+</html>

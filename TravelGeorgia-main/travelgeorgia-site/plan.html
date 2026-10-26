@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ჩემი გეგმა — TravelGeorgia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@500;700&family=Noto+Sans+Georgian:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .plan-item { display:flex; justify-content:space-between; align-items:center; gap:16px; border:1px solid var(--line); border-radius:var(--radius-m); padding:16px 20px; background:var(--surface); margin-bottom:12px; flex-wrap:wrap; }
+  .plan-item h3 { margin:0 0 4px; font-size:1.05rem; }
+  .plan-item .meta { color:var(--text-muted); font-size:0.85rem; }
+  .plan-summary { display:flex; gap:32px; flex-wrap:wrap; margin-bottom:28px; padding:20px; border:1px solid var(--line); border-radius:var(--radius-m); background:var(--surface); }
+  .plan-empty { color: var(--text-muted); }
+</style>
+</head>
+<body data-page="plan">
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Travel<span>Georgia</span></a>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="index.html" data-page="home">მთავარი</a></li>
+        <li><a href="catalog.html" data-page="catalog">ბილიკები</a></li>
+        <li><a href="plan.html" data-page="plan">ჩემი გეგმა</a></li>
+        <li><a href="contact.html" data-page="contact">კონტაქტი</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="თემის შეცვლა" title="მუქი/ნათელი თემა">🌙</button>
+      <button class="nav-toggle" aria-expanded="false" aria-label="მენიუს გახსნა">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="section" style="padding-top:48px;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>ჩემი მოგზაურობის გეგმა</h2>
+      <p>ბილიკები, რომლებიც კატალოგიდან დაამატე.</p>
+    </div>
+
+    <div class="plan-summary" id="plan-summary"></div>
+    <div id="plan-list"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 TravelGeorgia — სასწავლო პროექტი</span>
+    <span>დამზადებულია სუფთა HTML, CSS და JavaScript-ით</span>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const PLAN_KEY = "travelgeorgia-plan";
+  const summaryEl = document.getElementById("plan-summary");
+  const listEl = document.getElementById("plan-list");
+
+  function getPlanIds() {
+    return JSON.parse(localStorage.getItem(PLAN_KEY) || "[]");
+  }
+
+  function setPlanIds(ids) {
+    localStorage.setItem(PLAN_KEY, JSON.stringify(ids));
+  }
+
+  function removeFromPlan(id) {
+    setPlanIds(getPlanIds().filter((x) => x !== id));
+    render();
+  }
+
+  function render() {
+    const ids = getPlanIds();
+    const trails = ids.map((id) => TRAILS.find((t) => t.id === id)).filter(Boolean);
+
+    if (!trails.length) {
+      summaryEl.innerHTML = `<p class="plan-empty" style="margin:0;">გეგმა ჯერ ცარიელია — დაამატე ბილიკები <a href="catalog.html" style="color:var(--accent-soft);">კატალოგიდან</a>.</p>`;
+      listEl.innerHTML = "";
+      return;
+    }
+
+    const totalDistance = trails.reduce((sum, t) => sum + t.distanceKm, 0);
+    const totalDuration = trails.reduce((sum, t) => sum + t.durationHours, 0);
+
+    summaryEl.innerHTML = `
+      <div class="stat"><span class="num">${trails.length}</span><span class="label">ბილიკი გეგმაში</span></div>
+      <div class="stat"><span class="num">${totalDistance} კმ</span><span class="label">ჯამური მანძილი</span></div>
+      <div class="stat"><span class="num">${totalDuration} სთ</span><span class="label">სავარაუდო დრო</span></div>
+    `;
+
+    listEl.innerHTML = trails
+      .map(
+        (t) => `
+      <div class="plan-item">
+        <div>
+          <h3>${t.name}</h3>
+          <div class="meta">${t.region} · ${t.difficulty} · ${formatDistance(t.distanceKm)} · ${formatDuration(t.durationHours)}</div>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <a class="btn btn-ghost" href="details.html?id=${encodeURIComponent(t.id)}">ნახვა</a>
+          <button class="btn btn-ghost" data-remove="${t.id}">წაშლა</button>
+        </div>
+      </div>`
+      )
+      .join("");
+
+    listEl.querySelectorAll("[data-remove]").forEach((btn) => {
+      btn.addEventListener("click", () => removeFromPlan(btn.dataset.remove));
+    });
+  }
+
+  render();
+</script>
+</body>
+</html>

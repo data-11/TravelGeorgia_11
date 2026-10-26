@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>კონტაქტი — TravelGeorgia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@500;700&family=Noto+Sans+Georgian:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .contact-form { max-width: 560px; display:flex; flex-direction:column; gap:18px; }
+  .field { display:flex; flex-direction:column; gap:6px; }
+  .field label { font-size:0.9rem; color:var(--text-muted); }
+  .field input, .field textarea {
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-s);
+    padding:12px 14px; color:var(--text);
+  }
+  .field textarea { min-height:120px; resize:vertical; }
+  .field input:focus, .field textarea:focus { outline:2px solid var(--accent-soft); outline-offset:1px; }
+  .error-text { color: var(--danger); font-size: 0.82rem; min-height: 1em; }
+  .field.has-error input, .field.has-error textarea { border-color: var(--danger); }
+  .success-box {
+    border:1px solid var(--accent-2); border-radius:var(--radius-m); padding:20px;
+    color:var(--accent-2); display:none;
+  }
+  .success-box.show { display:block; }
+</style>
+</head>
+<body data-page="contact">
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Travel<span>Georgia</span></a>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="index.html" data-page="home">მთავარი</a></li>
+        <li><a href="catalog.html" data-page="catalog">ბილიკები</a></li>
+        <li><a href="plan.html" data-page="plan">ჩემი გეგმა</a></li>
+        <li><a href="contact.html" data-page="contact">კონტაქტი</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="თემის შეცვლა" title="მუქი/ნათელი თემა">🌙</button>
+      <button class="nav-toggle" aria-expanded="false" aria-label="მენიუს გახსნა">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="section" style="padding-top:48px;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>დაგვიკავშირდი</h2>
+      <p>გვაქვს კითხვა ბილიკზე ან გინდა დახმარება მარშრუტის დაგეგმვაში? მოგვწერე.</p>
+    </div>
+
+    <div class="success-box" id="success-box">
+      მადლობა! შენი შეტყობინება მიღებულია — მალე დაგიკავშირდებით.
+    </div>
+
+    <form class="contact-form" id="contact-form" novalidate>
+      <div class="field" id="field-name">
+        <label for="name">სახელი</label>
+        <input type="text" id="name" name="name" autocomplete="name" />
+        <span class="error-text" id="error-name"></span>
+      </div>
+
+      <div class="field" id="field-contact">
+        <label for="contact">ელფოსტა ან ტელეფონი</label>
+        <input type="text" id="contact" name="contact" autocomplete="email" />
+        <span class="error-text" id="error-contact"></span>
+      </div>
+
+      <div class="field" id="field-message">
+        <label for="message">შეტყობინება</label>
+        <textarea id="message" name="message" placeholder="მაგ. მაინტერესებს ორდღიანი მარშრუტი სვანეთში..."></textarea>
+        <span class="error-text" id="error-message"></span>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="align-self:flex-start;">გაგზავნა</button>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 TravelGeorgia — სასწავლო პროექტი</span>
+    <span>დამზადებულია სუფთა HTML, CSS და JavaScript-ით</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  const form = document.getElementById("contact-form");
+  const successBox = document.getElementById("success-box");
+
+  function setError(fieldId, errorId, message) {
+    const field = document.getElementById(fieldId);
+    const error = document.getElementById(errorId);
+    field.classList.toggle("has-error", Boolean(message));
+    error.textContent = message || "";
+  }
+
+  function isValidContact(value) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern = /^[+\d][\d\s-]{6,}$/;
+    return emailPattern.test(value) || phonePattern.test(value);
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    successBox.classList.remove("show");
+
+    const name = document.getElementById("name").value.trim();
+    const contact = document.getElementById("contact").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    let valid = true;
+
+    if (name.length < 2) {
+      setError("field-name", "error-name", "სახელი უნდა შეიცავდეს მინიმუმ 2 სიმბოლოს.");
+      valid = false;
+    } else {
+      setError("field-name", "error-name", "");
+    }
+
+    if (!isValidContact(contact)) {
+      setError("field-contact", "error-contact", "შეიყვანე ვალიდური ელფოსტა ან ტელეფონის ნომერი.");
+      valid = false;
+    } else {
+      setError("field-contact", "error-contact", "");
+    }
+
+    if (message.length < 10) {
+      setError("field-message", "error-message", "შეტყობინება უნდა შეიცავდეს მინიმუმ 10 სიმბოლოს.");
+      valid = false;
+    } else {
+      setError("field-message", "error-message", "");
+    }
+
+    if (valid) {
+      successBox.classList.add("show");
+      form.reset();
+    }
+  });
+</script>
+</body>
+</html>

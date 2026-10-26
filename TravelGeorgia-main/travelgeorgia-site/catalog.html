@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ბილიკები — TravelGeorgia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@500;700&family=Noto+Sans+Georgian:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="catalog">
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Travel<span>Georgia</span></a>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="index.html" data-page="home">მთავარი</a></li>
+        <li><a href="catalog.html" data-page="catalog">ბილიკები</a></li>
+        <li><a href="plan.html" data-page="plan">ჩემი გეგმა</a></li>
+        <li><a href="contact.html" data-page="contact">კონტაქტი</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="თემის შეცვლა" title="მუქი/ნათელი თემა">🌙</button>
+      <button class="nav-toggle" aria-expanded="false" aria-label="მენიუს გახსნა">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="section" style="padding-top:48px;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>ყველა ბილიკი</h2>
+      <p id="result-count"></p>
+    </div>
+
+    <form class="filters" id="filters">
+      <div class="filter-field search">
+        <label for="f-search">ძიება</label>
+        <input type="search" id="f-search" placeholder="მაგ. ტბა, კანიონი, მონასტერი..." />
+      </div>
+      <div class="filter-field">
+        <label for="f-region">რეგიონი</label>
+        <select id="f-region">
+          <option value="">ყველა</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label for="f-difficulty">სირთულე</label>
+        <select id="f-difficulty">
+          <option value="">ყველა</option>
+          <option value="მარტივი">მარტივი</option>
+          <option value="საშუალო">საშუალო</option>
+          <option value="რთული">რთული</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label for="f-season">სეზონი</label>
+        <select id="f-season">
+          <option value="">ყველა</option>
+          <option value="გაზაფხული">გაზაფხული</option>
+          <option value="ზაფხული">ზაფხული</option>
+          <option value="შემოდგომა">შემოდგომა</option>
+          <option value="ზამთარი">ზამთარი</option>
+        </select>
+      </div>
+    </form>
+
+    <div class="trail-grid" id="trail-grid"></div>
+  </div>
+</section>
+
+<!-- რუკის მოდალი სწრაფი ნახვისთვის -->
+<div class="map-modal-backdrop" id="map-modal" aria-hidden="true" style="display:none;">
+  <div class="map-modal-content">
+    <div class="map-modal-header">
+      <div>
+        <span class="region-tag" id="modal-region"></span>
+        <h3 id="modal-title" style="margin:4px 0 0;"></h3>
+      </div>
+      <button class="map-modal-close" id="modal-close" aria-label="დახურვა">✕</button>
+    </div>
+    <div id="modal-map" class="map-modal-map"></div>
+    <div class="map-modal-footer">
+      <span class="map-coords" id="modal-coords"></span>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn btn-ghost btn-sm" id="modal-gmaps-link" href="#" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-primary btn-sm" id="modal-detail-link" href="#">დეტალურად ნახვა</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 TravelGeorgia — სასწავლო პროექტი</span>
+    <span>დამზადებულია სუფთა HTML, CSS და JavaScript-ით</span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/catalog.js"></script>
+</body>
+</html>
