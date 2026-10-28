@@ -1,0 +1,53 @@
+/* ==========================================================================
+   TravelGeorgia — ფილტრები (Filters)
+   ========================================================================== */
+
+.filters {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.filter-field label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.filter-field select,
+.filter-field input {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  padding: 10px 14px;
+  color: var(--text);
+  font-size: 0.92rem;
+  min-width: 160px;
+  transition: all 0.15s ease;
+}
+
+.filter-field.search {
+  flex: 1;
+  min-width: 240px;
+}
+
+.filter-field input:focus,
+.filter-field select:focus {
+  outline: none;
+  background: var(--surface);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(196, 91, 40, 0.15);
+}

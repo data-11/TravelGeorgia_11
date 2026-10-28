@@ -1,0 +1,74 @@
+/* ==========================================================================
+   TravelGeorgia — კონტაქტის ფორმა
+   ========================================================================== */
+
+.contact-form {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.field input,
+.field textarea {
+  background: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  color: var(--text) !important;
+  border-radius: var(--radius-s) !important;
+  padding: 12px 14px;
+}
+
+.field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(196, 91, 40, 0.15) !important;
+  outline: none !important;
+}
+
+.error-text {
+  color: var(--danger);
+  font-size: 0.82rem;
+  min-height: 1em;
+}
+
+.field.has-error input,
+.field.has-error textarea {
+  border-color: var(--danger) !important;
+}
+
+.success-box {
+  background: #eaf5ee !important;
+  border: 1px solid #c4e3d0 !important;
+  color: #1e6b45 !important;
+  border-radius: var(--radius-m);
+  padding: 20px;
+  margin-bottom: 24px;
+  display: none;
+}
+
+.success-box.show {
+  display: block;
+}
+
+[data-theme="dark"] .success-box {
+  background: rgba(78, 155, 114, 0.18) !important;
+  border-color: rgba(78, 155, 114, 0.35) !important;
+  color: #6fc496 !important;
+}

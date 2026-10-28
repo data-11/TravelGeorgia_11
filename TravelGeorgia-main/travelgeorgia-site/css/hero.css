@@ -1,0 +1,117 @@
+/* ==========================================================================
+   TravelGeorgia — Hero სექცია
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 88px 0 76px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, var(--bg) 100%);
+  transition: background 0.25s ease;
+}
+
+[data-theme="dark"] .hero {
+  background: linear-gradient(180deg, rgba(24, 34, 27, 0.5) 0%, var(--bg) 100%);
+}
+
+.hero .wrap {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid rgba(196, 91, 40, 0.22);
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(2.35rem, 4.6vw, 3.45rem);
+  line-height: 1.18;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.hero p.lede {
+  color: var(--text-muted);
+  font-size: 1.12rem;
+  max-width: 48ch;
+  line-height: 1.65;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.hero-art {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: 0 12px 36px -6px rgba(24, 35, 28, 0.08), 0 2px 6px rgba(24, 35, 28, 0.03);
+}
+
+/* Hero SVG სტილიზაცია */
+.hero-art svg {
+  display: block;
+}
+
+.hero-art rect {
+  fill: #f2ece1 !important;
+  transition: fill 0.25s ease;
+}
+
+.hero-art g path {
+  stroke: #d6cdbc !important;
+  stroke-width: 1.5;
+  transition: stroke 0.25s ease;
+}
+
+.hero-art path[fill="#26382e"],
+.hero-art > svg > path:not([stroke="#35473c"]) {
+  fill: #274d39 !important;
+  stroke: #c45b28 !important;
+  stroke-width: 2.5;
+  transition: fill 0.25s ease, stroke 0.25s ease;
+}
+
+.hero-art circle {
+  fill: #c45b28 !important;
+  transition: fill 0.25s ease;
+}
+
+[data-theme="dark"] .hero-art rect {
+  fill: #16211a !important;
+}
+
+[data-theme="dark"] .hero-art g path {
+  stroke: #27392d !important;
+}
+
+[data-theme="dark"] .hero-art path[fill="#26382e"],
+[data-theme="dark"] .hero-art > svg > path:not([stroke="#35473c"]) {
+  fill: #223c2d !important;
+  stroke: #dc7438 !important;
+}
+
+[data-theme="dark"] .hero-art circle {
+  fill: #dc7438 !important;
+}

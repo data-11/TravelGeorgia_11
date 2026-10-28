@@ -8,7 +8,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@500;700&family=Noto+Sans+Georgian:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/variables.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/header.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/hero.css" />
+<link rel="stylesheet" href="css/footer.css" />
+<link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body data-page="home">
 
@@ -83,37 +89,6 @@
 
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
-<script>
-  // მთავარი გვერდის სტატისტიკისა და რეგიონების ბარათების რენდერი
-  function renderHomeStats(trails) {
-    const regions = getRegions(trails);
-    const totalDistance = trails.reduce((sum, t) => sum + t.distanceKm, 0);
-
-    document.getElementById("stat-trails").textContent = trails.length;
-    document.getElementById("stat-regions").textContent = regions.length;
-    document.getElementById("stat-distance").textContent = totalDistance;
-  }
-
-  function renderRegionGrid(trails) {
-    const grid = document.getElementById("region-grid");
-    const regions = getRegions(trails);
-
-    grid.innerHTML = regions
-      .map((region) => {
-        const count = trails.filter((t) => t.region === region).length;
-        const sample = trails.find((t) => t.region === region);
-        return `
-          <a class="region-card" href="catalog.html?region=${encodeURIComponent(region)}">
-            <div class="count">${count} ბილიკი</div>
-            <h3>${region}</h3>
-            <p>მაგ. ${sample.name}</p>
-          </a>`;
-      })
-      .join("");
-  }
-
-  renderHomeStats(TRAILS);
-  renderRegionGrid(TRAILS);
-</script>
+<script src="js/home.js"></script>
 </body>
 </html>

@@ -1,0 +1,49 @@
+/* ==========================================================================
+   TravelGeorgia — სამოგზაურო გეგმის გვერდი (My Plan)
+   ========================================================================== */
+
+.plan-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 18px 24px;
+  background: var(--surface);
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.18s ease;
+}
+
+.plan-item:hover {
+  border-color: var(--line-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.plan-item h3 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.plan-item .meta {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.plan-summary {
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  padding: 22px 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.plan-empty {
+  color: var(--text-muted);
+}

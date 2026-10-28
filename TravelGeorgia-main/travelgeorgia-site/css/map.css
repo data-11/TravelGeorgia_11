@@ -1,0 +1,173 @@
+/* ==========================================================================
+   TravelGeorgia — ინტერაქტიული რუკა და მოდალი (Leaflet & Maps)
+   ========================================================================== */
+
+.trail-map-section {
+  margin-top: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.map-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.map-head h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-coords {
+  font-family: monospace;
+  font-size: 0.88rem;
+  color: var(--accent);
+  background: var(--accent-bg);
+  padding: 5px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid rgba(196, 91, 40, 0.2);
+  font-weight: 600;
+}
+
+.trail-map-container {
+  width: 100%;
+  height: 420px;
+  background: var(--surface-alt);
+  position: relative;
+  z-index: 1;
+}
+
+/* რუკის მოდალი კატალოგში */
+.map-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 23, 19, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+.map-modal-content {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  width: 100%;
+  max-width: 780px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.map-modal-close {
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 1rem;
+  transition: all 0.15s ease;
+}
+
+.map-modal-close:hover {
+  background: var(--line);
+  color: var(--accent);
+}
+
+.map-modal-map {
+  width: 100%;
+  height: 380px;
+  background: var(--surface-alt);
+}
+
+.map-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  border-top: 1px solid var(--line);
+  background: var(--surface-alt);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.map-actions {
+  display: flex;
+  gap: 12px;
+  padding: 14px 24px;
+  background: var(--surface-alt);
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+/* Leaflet Dark mode სტილები */
+[data-theme="dark"] .leaflet-tile-pane {
+  filter: invert(100%) hue-rotate(180deg) brightness(88%) contrast(92%);
+}
+
+[data-theme="dark"] .leaflet-control-zoom a,
+[data-theme="dark"] .leaflet-control-layers {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--line) !important;
+}
+
+[data-theme="dark"] .leaflet-control-layers-expanded {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="dark"] .leaflet-control-attribution {
+  background: rgba(17, 23, 19, 0.85) !important;
+  color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .leaflet-control-attribution a {
+  color: var(--accent) !important;
+}
+
+[data-theme="dark"] .leaflet-container {
+  background: #111713;
+}
+
+[data-theme="dark"] .leaflet-popup-content-wrapper,
+[data-theme="dark"] .leaflet-popup-tip {
+  background: #18221b;
+  color: #ede8dc;
+  border: 1px solid #26382c;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}

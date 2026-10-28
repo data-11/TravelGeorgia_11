@@ -1,0 +1,24 @@
+/* ==========================================================================
+   TravelGeorgia — ფუტერი
+   ========================================================================== */
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 40px 0;
+  background: #f4efe6;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  transition: background 0.25s ease;
+}
+
+[data-theme="dark"] .site-footer {
+  background: #0e1410;
+}
+
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}

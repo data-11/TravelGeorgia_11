@@ -1,0 +1,101 @@
+/* ==========================================================================
+   TravelGeorgia — საბაზისო წესები და ზოგადი განლაგება
+   ========================================================================== */
+
+/* საბაზისო წესები */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 0.5em;
+  color: var(--text);
+  letter-spacing: -0.015em;
+}
+
+p {
+  margin: 0 0 1em;
+  max-width: 62ch;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* კონტეინერი და სექციები */
+.wrap {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 64px 0;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.65rem, 2.5vw, 2.15rem);
+  margin: 0;
+  color: var(--text);
+}
+
+.section-head p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* ხელმისაწვდომობის ფოკუსი */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
